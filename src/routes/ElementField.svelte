@@ -11,6 +11,6 @@
 {:else if (type === "atomic_number")}
     <div class="input-group mb-3 mx-auto">
         <span class="input-group-text">Atomic number</span>
-        <input type="number" bind:value class="form-control" placeholder=1 />
+        <input type="number" bind:value class="form-control" placeholder=0 />
     </div>
 {/if}

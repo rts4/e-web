@@ -8,4 +8,4 @@
     </title>
 </svelte:head>
 
-<Container />
+<Container type="name" />
