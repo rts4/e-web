@@ -4,7 +4,7 @@
 
 <svelte:head>
     <title>
-        MPs-Web
+        E-Web
     </title>
 </svelte:head>
 
