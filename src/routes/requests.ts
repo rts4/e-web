@@ -1,7 +1,11 @@
-async function get(url: string, data = {}): Promise<any|null> {
+async function get(url: string): Promise<any> {
     const res = await fetch(url, { method: "GET", mode: "cors" });
-    if (res.status === 404 || res.status === 400) return null;
-    return res.json();
+    switch (res.status) {
+        case 200: return res.json();
+        case 404: return 404;
+        case 400: return 400;
+        default: return null;
+    }
 }
 
 export async function getElementName(name: string): Promise<any> {
