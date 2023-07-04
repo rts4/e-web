@@ -3,7 +3,6 @@
     import ElementField from "./ElementField.svelte";
     import BtnGroup from "./BtnGroup.svelte";
     import ElementBox from "./ElementBox.svelte";
-    import { roundTwo } from "./utils";
     import { getElementName, getElementAtomicNumber } from "./requests";
     export let type: string = "name";
     let elementValue: string|number;
