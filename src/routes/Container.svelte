@@ -3,6 +3,7 @@
     import ElementField from "./ElementField.svelte";
     import BtnGroup from "./BtnGroup.svelte";
     import ElementBox from "./ElementBox.svelte";
+    import { roundTwo } from "./utils";
     import { getElementName, getElementAtomicNumber } from "./requests";
     export let type: string = "name";
     let elementValue: string|number;
@@ -40,7 +41,7 @@
     {#if (element && typeof element === "object")}
         <br />
         <br />
-        <ElementBox name={element.Name} symbol={element.Symbol} atomicNumber={element.AtomicNumber} atomicMass={element.AtomicMass} groupBlock={element.GroupBlock} groupColourHex={element.GroupHexColor} />
+        <ElementBox name={element.Name} symbol={element.Symbol} atomicNumber={element.AtomicNumber} atomicMass={roundTwo(element.AtomicMass)} groupBlock={element.GroupBlock} groupColourHex={element.GroupHexColor} />
         <div class="container-md text-black my-3 p-3 rounded" style={`background-color: #${element.GroupHexColor};`}>
             <p class="border-bottom border-black">Standard State: {element.StandardState}</p>
             <p class="border-bottom border-black">Electron Configuration: {element.ElectronConfig}</p>
