@@ -9,6 +9,10 @@
     let element: any;
     let elementNotFound: string|number|null;
 
+    function capitalise(i: string) {
+        return i.charAt(0).toUpperCase() + i.slice(1);
+    }
+
     onMount(() => {
         if (type === "atomic_number") elementValue = 0;
     });
@@ -16,7 +20,7 @@
     async function handleSubmit() {
         if (element === 404) elementNotFound = elementValue;
         if (type === "name")
-            return element = await getElementName((<string>elementValue));
+            return element = await getElementName(((<string>elementValue).toLowerCase()));
         else if (type === "atomic_number")
             return element = await getElementAtomicNumber((<number>elementValue));
     }
@@ -40,13 +44,13 @@
     {#if (element && typeof element === "object")}
         <br />
         <br />
-        <ElementBox name={element.Name} symbol={element.Symbol} atomicNumber={element.AtomicNumber} atomicMass={element.AtomicMass} groupBlock={element.GroupBlock} groupColourHex={element.GroupHexColor} />
-        <div class="container-md text-black my-3 p-3 rounded" style={`background-color: #${element.GroupHexColor};`}>
-            <p class="border-bottom border-black">Standard State: {element.StandardState}</p>
-            <p class="border-bottom border-black">Electron Configuration: {element.ElectronConfig}</p>
-            <p class="border-bottom border-black">Oxidation States: {element.OxidationStates}</p>
-            <p class="border-bottom border-black">Melting/Boiling Points: {element.MeltingPoint} K (M), {element.BoilingPoint} K (B)</p>
-            <p class="border-bottom border-black">Discovered in {element.YearDiscovered === "Ancient" ? "ancient times." : `the year of ${element.YearDiscovered}.`}</p>
+        <ElementBox name={capitalise(element.name)} symbol={element.symbol} atomicNumber={element.atomic_number} atomicMass={element.atomic_mass} groupBlock={element.group_block} groupColourHex={element.group_hex_color} />
+        <div class="container-md text-black my-3 p-3 rounded" style={`background-color: #${element.group_hex_color};`}>
+            <p class="border-bottom border-black">Standard State: {element.standard_state}</p>
+            <p class="border-bottom border-black">Electron Configuration: {element.electron_config}</p>
+            <p class="border-bottom border-black">Oxidation States: {element.oxidation_states}</p>
+            <p class="border-bottom border-black">Melting/Boiling Points: {element.melting_point} K (M), {element.boiling_point} K (B)</p>
+            <p class="border-bottom border-black">Discovered in {element.year_discovered === "Ancient" ? "ancient times." : `the year of ${element.year_discovered}.`}</p>
         </div>
     {/if}
 </div>
