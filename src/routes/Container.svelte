@@ -4,6 +4,7 @@
     import BtnGroup from "./BtnGroup.svelte";
     import ElementBox from "./ElementBox.svelte";
     import { getElementName, getElementAtomicNumber } from "./requests";
+    import { sanitize } from "./utils";
     export let type: string = "name";
     let elementValue: string|number;
     let element: any;
@@ -26,6 +27,7 @@
     }
 
     $: if (type === "atomic_number" && ((<number>elementValue) < 0 || elementValue === null)) elementValue = 0;
+    $: console.log(sanitize(elementNotFound?.toString() ?? "null"));
 
     function handleReset() {element = null;}
     function handleClear() {elementValue = type === "atomic_number" ? 0 : ""; if (element === 404 || element === 400) {element = null; elementNotFound = null;}}
@@ -35,7 +37,7 @@
     <h3>E-Web</h3>
     <br />
     {#if (elementNotFound)}
-        <p class="alert alert-danger"><strong>Error:</strong> Failed to find element {elementNotFound} by {type === "name" ? "name" : "atomic number"}.</p>
+        <p class="alert alert-danger"><strong>Error:</strong> Failed to find element {type === "name" ? sanitize(elementNotFound.toString()) : elementNotFound} by {type === "name" ? "name" : "atomic number"}.</p>
     {:else if (element === 400)}
         <p class="alert alert-danger"><strong>Error:</strong> The remote server returned a Bad Request status. Please try again later.</p>
     {/if}
