@@ -27,7 +27,6 @@
     }
 
     $: if (type === "atomic_number" && ((<number>elementValue) < 0 || elementValue === null)) elementValue = 0;
-    $: console.log(sanitize(elementNotFound?.toString() ?? "null"));
 
     function handleReset() {element = null;}
     function handleClear() {elementValue = type === "atomic_number" ? 0 : ""; if (element === 404 || element === 400) {element = null; elementNotFound = null;}}
@@ -52,7 +51,10 @@
             <p class="border-bottom border-black">Electron Configuration: {element.electron_config}</p>
             <p class="border-bottom border-black">Oxidation States: {element.oxidation_states}</p>
             <p class="border-bottom border-black">Melting/Boiling Points: {element.melting_point} K (M), {element.boiling_point} K (B)</p>
-            <p class="border-bottom border-black">Discovered in {element.year_discovered === "Ancient" ? "ancient times." : `the year of ${element.year_discovered}.`}</p>
+            <p class="border-bottom border-black">{element.year_discovered === "Ancient" ? "Discovered in ancient times." : element.year_discovered === "Unknown" ? "Not yet discovered (theoretical element)." : `Discovered in the year of ${element.year_discovered}.`}</p>
+            {#if element.aliases[0] !== null}
+                <p class="border-bottom border-black">Aliases: {element.aliases.join(", ")}</p>
+            {/if}
         </div>
     {/if}
 </div>
