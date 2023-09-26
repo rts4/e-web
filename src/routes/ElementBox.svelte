@@ -60,7 +60,7 @@
         margin-right: auto;
     }
     #group-block {
-        font-size: 80%;
+        font-size: 75%;
         margin-left: auto;
         margin-right: auto;
     }
